@@ -1,0 +1,2 @@
+@include('votar.fields.tabela')
+    
