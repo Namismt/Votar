@@ -5,6 +5,7 @@
         <input type="checkbox" name="roupas" value="{{$votar->roupas}}">
         <button type="submit"name="botao"  onclick="return confirm('Tem certeza que deseja escolher essa camiseta');">Enviar</button>
 
+        
     </form>
 
 

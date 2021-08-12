@@ -3,30 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Roupa;
-use App\Models\Votar;
 use Illuminate\Http\Request;
 
-class VotarController extends Controller
+class RoupaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $votos = Votar::all();
         $roupas = Roupa::all();
-        $total = Votar::all()->count();
-        $totalroupa = Votar::where('roupa_id', $request->busca)->count();
-
-        return view('votar.index', [
-            'votos' => $votos,
-            'roupas'=>$roupas,
-            'total'=>$total,
-            'totalroupa'=>$totalroupa,
+        return view ('roupa.index',[
+            'roupas' => $roupas,
         ]);
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +27,9 @@ class VotarController extends Controller
      */
     public function create()
     {
-        //
+        return view ('roupa.create',[
+            'roupa' => new Roupa,
+        ]);
     }
 
     /**
@@ -46,54 +40,61 @@ class VotarController extends Controller
      */
     public function store(Request $request)
     {
-        $votar = new Votar;
-        $votar->roupa_id = $request->roupa_id;
-        $votar->save();
-        return redirect("/votar");
+        $roupa = new Roupa;
+        $roupa->nome = $request->nome;
+        $roupa->tipo = $request->tipo;
+        $roupa->save();
+        return redirect("/roupa");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Votar  $votar
+     * @param  \App\Models\Roupa  $roupa
      * @return \Illuminate\Http\Response
      */
-    public function show(Votar $votar)
+    public function show(Roupa $roupa)
     {
-            //
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Votar  $votar
+     * @param  \App\Models\Roupa  $roupa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Votar $votar)
+    public function edit(Roupa $roupa)
     {
-        //
+        return view('roupa.edit', [
+            'roupa'=>$roupa
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Votar  $votar
+     * @param  \App\Models\Roupa  $roupa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Votar $votar)
+    public function update(Request $request, Roupa $roupa)
     {
-        //
+            $roupa->nome = $request->nome;
+            $roupa->tipo = $request->tipo;
+            $roupa->save();
+            return redirect("/roupa");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Votar  $votar
+     * @param  \App\Models\Roupa  $roupa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Votar $votar)
+    public function destroy(Roupa $roupa)
     {
-        //
+        $roupa->delete();
+        return redirect('/roupa');
     }
 }

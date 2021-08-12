@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVotarsTable extends Migration
+class CreateEnquetesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateVotarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('votars', function (Blueprint $table) {
+        Schema::create('enquetes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('roupas');
+            $table->date('datafim');
+            $table->string('nome');
+            
+
         });
     }
 
@@ -27,6 +30,6 @@ class CreateVotarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votars');
+        Schema::dropIfExists('enquetes');
     }
 }
